@@ -62,10 +62,10 @@ class CardMovieWidget extends StatelessWidget {
                   Text(
                     movieInfo.releaseDateOf,
                     style: TextStyle(
-                        fontFamily: 'StarWars',
                         decorationColor: kPrimaryColor,
                         color: Colors.white,
-                        fontSize: 13),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 11),
                   )
                 ],
               ),

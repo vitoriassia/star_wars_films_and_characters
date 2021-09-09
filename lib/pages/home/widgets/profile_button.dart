@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_wars_films_and_characters/shared/constants.dart';
 
 class ProfileButton extends StatelessWidget {
   final Function() onPress;
@@ -9,6 +10,7 @@ class ProfileButton extends StatelessWidget {
       onTap: onPress,
       child: Card(
         shape: RoundedRectangleBorder(
+          side: BorderSide(color: kPrimaryColor, width: 2),
           borderRadius: BorderRadius.circular(50),
         ),
         elevation: 30,
@@ -19,13 +21,7 @@ class ProfileButton extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30.0),
-              child: Image.asset(
-                'assets/icon-profile.png',
-                fit: BoxFit.fill,
-              ),
-            )),
+            child: Icon(Icons.person, color: kPrimaryColor)),
       ),
     );
   }
