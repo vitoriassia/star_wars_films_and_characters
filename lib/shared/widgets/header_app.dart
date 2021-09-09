@@ -4,6 +4,10 @@ import 'package:star_wars_films_and_characters/shared/constants.dart';
 import 'package:star_wars_films_and_characters/shared/widgets/sweet_button.dart';
 
 class HeaderApp extends StatelessWidget {
+  final Function() onPressProfileButton;
+  final Function() onPressSiteButton;
+  HeaderApp(this.onPressProfileButton, this.onPressSiteButton);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -12,14 +16,14 @@ class HeaderApp extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SweetButton(
-              onPressed: () {},
+              onPressed: onPressProfileButton,
               text: "Site",
               icon: Icons.language,
               textcolor: Colors.white,
               color: kPrimaryColor,
               borderColor: Colors.white,
               isEnable: true),
-          ProfileButton(),
+          ProfileButton(onPressSiteButton),
         ],
       ),
     );

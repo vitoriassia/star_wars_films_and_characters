@@ -31,6 +31,10 @@ class _AppScaffoldState extends State<AppScaffold> {
       style: optionStyle,
     ),
     Text(
+      'Site',
+      style: optionStyle,
+    ),
+    Text(
       'Profile',
       style: optionStyle,
     ),
@@ -65,7 +69,11 @@ class _AppScaffoldState extends State<AppScaffold> {
       ),
       body: Column(
         children: [
-          HeaderApp(),
+          HeaderApp(() {
+            onTabChange(3);
+          }, () {
+            onTabChange(4);
+          }),
           Expanded(
             child: Center(
               child: _widgetOptions.elementAt(_selectedIndex),
