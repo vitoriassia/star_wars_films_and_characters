@@ -2,7 +2,11 @@ import 'package:star_wars_films_and_characters/pages/home/home_bloc.dart';
 import 'package:star_wars_films_and_characters/pages/home/home_module.dart';
 
 import 'package:flutter/material.dart';
+import 'package:star_wars_films_and_characters/pages/home/widgets/list_of_movies/list_of_movie_widget.dart';
+import 'package:star_wars_films_and_characters/shared/constants.dart';
 import 'package:star_wars_films_and_characters/shared/widgets/app_scaffold.dart';
+import 'package:star_wars_films_and_characters/shared/widgets/header_app.dart';
+import 'package:star_wars_films_and_characters/shared/widgets/tab_navigation.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,18 +15,55 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late HomeBloc bloc;
-
+  late List<Widget> widgetsTab;
   @override
   void initState() {
     super.initState();
     bloc = HomeModule.to.getBloc<HomeBloc>();
     bloc.getContacts();
+    widgetsTab = <Widget>[
+      ListOfMovieWidget(),
+      Text(
+        'Personagens',
+        style: optionStyle,
+      ),
+      Text(
+        'Favoritos',
+        style: optionStyle,
+      ),
+      Text(
+        'Site',
+        style: optionStyle,
+      ),
+      Text(
+        'Profile',
+        style: optionStyle,
+      ),
+    ];
+  }
+
+  int _selectedIndex = 0;
+
+  void onTabChange(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      body: Container(),
+      bottomTabNavigationBar: TabNavigation(_selectedIndex, onTabChange),
+      body: Column(
+        children: [
+          HeaderApp(() {
+            onTabChange(3);
+          }, () {
+            onTabChange(4);
+          }),
+          Expanded(child: Center(child: widgetsTab.elementAt(_selectedIndex))),
+        ],
+      ),
     );
   }
   // @override

@@ -57,5 +57,7 @@ flutter:
     - family: StarWars
       fonts:
         - asset: fonts/Starjedi.ttf
-        
+    - family: StarWarsOut
+      fonts:
+        - asset: fonts/Starjout.ttf
 
