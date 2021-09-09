@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:star_wars_films_and_characters/shared/constants.dart';
 
 class TabNavigation extends StatelessWidget {
   final int _selectedIndex;
@@ -28,20 +29,26 @@ class TabNavigation extends StatelessWidget {
               iconSize: 24,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               duration: Duration(milliseconds: 400),
-              tabBackgroundColor: Colors.grey[100]!,
+              tabBackgroundColor: kPrimaryColor,
               color: Colors.black,
               tabs: [
                 GButton(
                   icon: Icons.movie,
                   text: 'Filmes',
+                  iconActiveColor: Colors.white,
+                  textColor: Colors.white,
                 ),
                 GButton(
                   icon: Icons.groups,
                   text: 'Personagens',
+                  iconActiveColor: Colors.white,
+                  textColor: Colors.white,
                 ),
                 GButton(
                   icon: Icons.favorite,
                   text: 'Favoritos',
+                  iconActiveColor: Colors.white,
+                  textColor: Colors.white,
                 ),
               ],
               selectedIndex: _selectedIndex,
