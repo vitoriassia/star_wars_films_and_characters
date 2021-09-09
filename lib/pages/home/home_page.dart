@@ -3,6 +3,7 @@ import 'package:star_wars_films_and_characters/pages/home/home_module.dart';
 import 'package:star_wars_films_and_characters/pages/home/widgets/contact_tile_widget.dart';
 import 'package:star_wars_films_and_characters/shared/models/contact_model.dart';
 import 'package:flutter/material.dart';
+import 'package:star_wars_films_and_characters/shared/widgets/app_scaffold.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -21,39 +22,39 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text("Lista de Contatos"),
-      ),
-      body: Center(
-        child: StreamBuilder<List<ContactModel>>(
-          stream: bloc.contactsOut,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return snapshot.data!.isEmpty
-                  ? Container(
-                      child: Text(
-                        "Não há contatos cadastrados",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                    )
-                  : SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: snapshot.data!
-                            .map((contact) =>
-                                ContactTileWidget(contactModel: contact))
-                            .toList(),
-                      ),
-                    );
-            } else {
-              return CircularProgressIndicator();
-            }
-          },
-        ),
-      ),
+    return AppScaffold(
+      body: Container(),
     );
   }
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Center(
+  //     child: StreamBuilder<List<ContactModel>>(
+  //       stream: bloc.contactsOut,
+  //       builder: (context, snapshot) {
+  //         if (snapshot.hasData) {
+  //           return snapshot.data!.isEmpty
+  //               ? Container(
+  //                   child: Text(
+  //                     "Não há contatos cadastrados",
+  //                     style:
+  //                         TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+  //                   ),
+  //                 )
+  //               : SingleChildScrollView(
+  //                   child: Column(
+  //                     mainAxisAlignment: MainAxisAlignment.center,
+  //                     children: snapshot.data!
+  //                         .map((contact) =>
+  //                             ContactTileWidget(contactModel: contact))
+  //                         .toList(),
+  //                   ),
+  //                 );
+  //         } else {
+  //           return CircularProgressIndicator();
+  //         }
+  //       },
+  //     ),
+  //   );
+  // }
 }
