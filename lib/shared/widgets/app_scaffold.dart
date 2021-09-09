@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_wars_films_and_characters/shared/constants.dart';
+import 'package:star_wars_films_and_characters/shared/widgets/header_app.dart';
 import 'package:star_wars_films_and_characters/shared/widgets/tab_navigation.dart';
 
 class AppScaffold extends StatefulWidget {
@@ -62,8 +63,15 @@ class _AppScaffoldState extends State<AppScaffold> {
         ),
         actions: <Widget>[],
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      body: Column(
+        children: [
+          HeaderApp(),
+          Expanded(
+            child: Center(
+              child: _widgetOptions.elementAt(_selectedIndex),
+            ),
+          ),
+        ],
       ),
     );
   }

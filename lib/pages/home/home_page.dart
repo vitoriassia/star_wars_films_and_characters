@@ -1,7 +1,6 @@
 import 'package:star_wars_films_and_characters/pages/home/home_bloc.dart';
 import 'package:star_wars_films_and_characters/pages/home/home_module.dart';
-import 'package:star_wars_films_and_characters/pages/home/widgets/contact_tile_widget.dart';
-import 'package:star_wars_films_and_characters/shared/models/contact_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:star_wars_films_and_characters/shared/widgets/app_scaffold.dart';
 
