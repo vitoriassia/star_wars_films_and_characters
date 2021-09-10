@@ -2,6 +2,7 @@ import 'package:star_wars_films_and_characters/pages/home/home_bloc.dart';
 import 'package:star_wars_films_and_characters/pages/home/home_module.dart';
 
 import 'package:flutter/material.dart';
+import 'package:star_wars_films_and_characters/pages/home/widgets/list_of_character/list_of_character.dart';
 import 'package:star_wars_films_and_characters/pages/home/widgets/list_of_movies/list_of_movie_widget.dart';
 import 'package:star_wars_films_and_characters/shared/constants.dart';
 import 'package:star_wars_films_and_characters/shared/widgets/app_scaffold.dart';
@@ -23,10 +24,7 @@ class _HomePageState extends State<HomePage> {
     bloc.getContacts();
     widgetsTab = <Widget>[
       ListOfMovieWidget(),
-      Text(
-        'Personagens',
-        style: optionStyle,
-      ),
+      ListOfCharacter(),
       Text(
         'Favoritos',
         style: optionStyle,

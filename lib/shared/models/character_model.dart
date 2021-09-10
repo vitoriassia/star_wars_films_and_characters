@@ -1,14 +1,14 @@
 class CharacterModel {
   String name;
-  String email;
+  String actorName;
   String image;
 
   CharacterModel(
-      {required this.name, required this.image, required this.email});
+      {required this.name, required this.image, required this.actorName});
 
   factory CharacterModel.fromJson(Map<String, dynamic> json) => CharacterModel(
         name: json["name"]["first"] + " " + json["name"]["last"],
         image: json["picture"]["large"],
-        email: json["email"],
+        actorName: json["actorName"],
       );
 }
