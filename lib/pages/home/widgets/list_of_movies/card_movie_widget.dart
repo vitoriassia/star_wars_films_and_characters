@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:star_wars_films_and_characters/shared/constants.dart';
 import 'package:star_wars_films_and_characters/shared/models/movie_model.dart';
+import 'package:star_wars_films_and_characters/shared/widgets/heart_animation_widget.dart';
 
-class CardMovieWidget extends StatelessWidget {
+class CardMovieWidget extends StatefulWidget {
   final MovieModel movieInfo;
 
   CardMovieWidget({required this.movieInfo});
+
+  @override
+  _CardMovieWidgetState createState() => _CardMovieWidgetState();
+}
+
+class _CardMovieWidgetState extends State<CardMovieWidget> {
+  bool isLiked = false;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -24,11 +32,16 @@ class CardMovieWidget extends StatelessWidget {
             //   width: double.infinity,
             //   fit: BoxFit.cover,
             // ),
-            Image.asset(
-              movieInfo.photo,
-              height: 150,
-              width: double.infinity,
-              fit: BoxFit.fill,
+            Stack(
+              children: [
+                Image.asset(
+                  widget.movieInfo.photo,
+                  height: 150,
+                  width: double.infinity,
+                  fit: BoxFit.fill,
+                ),
+                buildActions
+              ],
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -36,7 +49,7 @@ class CardMovieWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    movieInfo.name,
+                    widget.movieInfo.name,
                     style: TextStyle(
                         decorationColor: kPrimaryColor,
                         fontFamily: 'StarWars',
@@ -60,7 +73,7 @@ class CardMovieWidget extends StatelessWidget {
                     width: 5,
                   ),
                   Text(
-                    movieInfo.releaseDateOf,
+                    widget.movieInfo.releaseDateOf,
                     style: TextStyle(
                         decorationColor: kPrimaryColor,
                         color: Colors.white,
@@ -78,6 +91,33 @@ class CardMovieWidget extends StatelessWidget {
       ),
       elevation: 8,
       margin: EdgeInsets.all(10),
+    );
+  }
+
+  Widget get buildActions {
+    final icon = isLiked ? Icons.favorite : Icons.favorite_outline;
+    final color = Colors.white;
+
+    return Container(
+      padding: EdgeInsets.all(4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          HeartAnimationWidget(
+            child: IconButton(
+              icon: Icon(
+                icon,
+                color: color,
+              ),
+              onPressed: () => setState(() {
+                isLiked = !isLiked;
+              }),
+            ),
+            isAnimating: isLiked,
+            duration: Duration(milliseconds: 400),
+          ),
+        ],
+      ),
     );
   }
 }
