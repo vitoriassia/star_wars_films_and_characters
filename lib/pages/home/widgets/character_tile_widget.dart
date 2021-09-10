@@ -1,9 +1,9 @@
-import 'package:star_wars_films_and_characters/shared/models/contact_model.dart';
 import 'package:flutter/material.dart';
+import 'package:star_wars_films_and_characters/shared/models/character_model.dart';
 
-class ContactTileWidget extends StatelessWidget {
-  final ContactModel contactModel;
-  ContactTileWidget({required this.contactModel});
+class CharacterTileWidget extends StatelessWidget {
+  final CharacterModel contactModel;
+  CharacterTileWidget({required this.contactModel});
   @override
   Widget build(BuildContext context) {
     return Card(

@@ -1,33 +1,33 @@
 import 'package:star_wars_films_and_characters/core/repositories/home_repository.dart';
-import 'package:star_wars_films_and_characters/shared/models/contact_model.dart';
+import 'package:star_wars_films_and_characters/shared/models/character_model.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:rxdart/rxdart.dart';
 
 class HomeBloc extends BlocBase {
   final HomeRepository repo;
   HomeBloc(this.repo) {
-    this.contactsOut = _contacts.stream;
-    this._contactIn = _contacts.sink;
+    this.charactersOut = _characters.stream;
+    this._charactersIn = _characters.sink;
   }
 
   //?STREAMS
-  var _contacts = BehaviorSubject<List<ContactModel>>();
-  late Stream<List<ContactModel>> contactsOut;
-  late Sink<List<ContactModel>> _contactIn;
+  var _characters = BehaviorSubject<List<CharacterModel>>();
+  late Stream<List<CharacterModel>> charactersOut;
+  late Sink<List<CharacterModel>> _charactersIn;
 
   Future<void> getContacts() async {
     try {
       var myListContacts = await repo.getContacts();
-      _contactIn.add(myListContacts);
+      _charactersIn.add(myListContacts);
     } catch (e) {
-      _contacts.addError(e);
+      _characters.addError(e);
     }
   }
 
   @override
   void dispose() {
-    _contacts.close();
-    _contactIn.close();
+    _characters.close();
+    _charactersIn.close();
     super.dispose();
   }
 }
