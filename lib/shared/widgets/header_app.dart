@@ -10,21 +10,24 @@ class HeaderApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SweetButton(
-              onPressed: onPressProfileButton,
-              text: "Site",
-              icon: Icons.language,
-              textcolor: Colors.white,
-              color: kPrimaryColor,
-              borderColor: Colors.white,
-              isEnable: true),
-          ProfileButton(onPressSiteButton),
-        ],
+    return Container(
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SweetButton(
+                onPressed: onPressProfileButton,
+                text: "Site",
+                icon: Icons.language,
+                textcolor: Colors.white,
+                color: kPrimaryColor,
+                borderColor: Colors.white,
+                isEnable: true),
+            ProfileButton(onPressSiteButton),
+          ],
+        ),
       ),
     );
   }

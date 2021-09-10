@@ -13,7 +13,7 @@ class ProfileButton extends StatelessWidget {
           side: BorderSide(color: kPrimaryColor, width: 2),
           borderRadius: BorderRadius.circular(50),
         ),
-        elevation: 30,
+        elevation: 10,
         child: Container(
             width: 50,
             height: 50,

@@ -2,32 +2,50 @@ import 'package:star_wars_films_and_characters/core/repositories/home_repository
 import 'package:star_wars_films_and_characters/shared/models/character_model.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:star_wars_films_and_characters/shared/models/movie_model.dart';
 
 class HomeBloc extends BlocBase {
   final HomeRepository repo;
+  List<MovieModel> _movies = [];
+  List<CharacterModel> _characters = [];
   HomeBloc(this.repo) {
-    this.charactersOut = _characters.stream;
-    this._charactersIn = _characters.sink;
+    this.loadingOut = _loading.stream;
+    this._loadingIn = _loading.sink;
   }
 
   //?STREAMS
-  var _characters = BehaviorSubject<List<CharacterModel>>();
-  late Stream<List<CharacterModel>> charactersOut;
-  late Sink<List<CharacterModel>> _charactersIn;
+  var _loading = BehaviorSubject<bool>.seeded(false);
+  late Stream<bool> loadingOut;
+  late Sink<bool> _loadingIn;
 
-  Future<void> getContacts() async {
+  Future<void> loadingData() async {
+    _loadingIn.add(true);
+    await loadingListOfCharacters();
+    _loadingIn.add(false);
+  }
+
+  Future<void> loadingListOfCharacters() async {
     try {
-      var myListContacts = await repo.getContacts();
-      _charactersIn.add(myListContacts);
+      var newList = await repo.getCharacters();
+      _characters.addAll(newList);
     } catch (e) {
-      _characters.addError(e);
+      _loading.addError(e);
+    }
+  }
+
+  Future<void> loadingListOfMovies() async {
+    try {
+      var newList = await repo.getMovies();
+      _movies.addAll(newList);
+    } catch (e) {
+      _loading.addError(e);
     }
   }
 
   @override
   void dispose() {
-    _characters.close();
-    _charactersIn.close();
+    _loading.close();
+    _loadingIn.close();
     super.dispose();
   }
 }

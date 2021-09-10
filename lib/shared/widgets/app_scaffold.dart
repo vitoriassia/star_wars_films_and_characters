@@ -32,7 +32,7 @@ class _AppScaffoldState extends State<AppScaffold> {
         ),
         actions: <Widget>[],
       ),
-      body: widget.body,
+      body: Container(color: Colors.white, child: widget.body),
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:star_wars_films_and_characters/pages/home/widgets/list_of_movies
 import 'package:star_wars_films_and_characters/shared/constants.dart';
 import 'package:star_wars_films_and_characters/shared/widgets/app_scaffold.dart';
 import 'package:star_wars_films_and_characters/shared/widgets/header_app.dart';
+import 'package:star_wars_films_and_characters/shared/widgets/progress_indicator_yoda.dart';
 import 'package:star_wars_films_and_characters/shared/widgets/tab_navigation.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     bloc = HomeModule.to.getBloc<HomeBloc>();
-    bloc.getContacts();
+    bloc.loadingData();
     widgetsTab = <Widget>[
       ListOfMovieWidget(),
       ListOfCharacter(),
@@ -59,7 +60,16 @@ class _HomePageState extends State<HomePage> {
           }, () {
             onTabChange(4);
           }),
-          Expanded(child: Center(child: widgetsTab.elementAt(_selectedIndex))),
+          StreamBuilder<bool>(
+            stream: bloc.loadingOut,
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              return snapshot.data
+                  ? ProgressIndicatorYoda()
+                  : Expanded(
+                      child:
+                          Center(child: widgetsTab.elementAt(_selectedIndex)));
+            },
+          )
         ],
       ),
     );
