@@ -2,6 +2,7 @@ class CharacterModel {
   String name;
   String actorName;
   String image;
+  bool isFavorit = false;
 
   CharacterModel(
       {required this.name, required this.image, required this.actorName});

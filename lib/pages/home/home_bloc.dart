@@ -13,6 +13,9 @@ class HomeBloc extends BlocBase {
     this._loadingIn = _loading.sink;
   }
 
+  List<MovieModel> get movies => _movies;
+  List<CharacterModel> get characters => _characters;
+
   //?STREAMS
   var _loading = BehaviorSubject<bool>.seeded(false);
   late Stream<bool> loadingOut;
@@ -21,6 +24,7 @@ class HomeBloc extends BlocBase {
   Future<void> loadingData() async {
     _loadingIn.add(true);
     await loadingListOfCharacters();
+    await loadingListOfMovies();
     _loadingIn.add(false);
   }
 

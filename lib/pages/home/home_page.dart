@@ -63,7 +63,8 @@ class _HomePageState extends State<HomePage> {
           StreamBuilder<bool>(
             stream: bloc.loadingOut,
             builder: (BuildContext context, AsyncSnapshot snapshot) {
-              return snapshot.data
+              return snapshot.connectionState == ConnectionState.waiting ||
+                      snapshot.data
                   ? ProgressIndicatorYoda()
                   : Expanded(
                       child:

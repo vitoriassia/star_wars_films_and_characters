@@ -46,7 +46,9 @@ class _CharacterTileWidgetState extends State<CharacterTileWidget> {
   }
 
   Widget get buildActions {
-    final icon = isLiked ? Icons.favorite : Icons.favorite_outline;
+    final icon = widget.characterModel.isFavorit
+        ? Icons.favorite
+        : Icons.favorite_outline;
     final color = Colors.red;
 
     return Container(
@@ -58,10 +60,10 @@ class _CharacterTileWidgetState extends State<CharacterTileWidget> {
             color: color,
           ),
           onPressed: () => setState(() {
-            isLiked = !isLiked;
+            widget.characterModel.isFavorit = !widget.characterModel.isFavorit;
           }),
         ),
-        isAnimating: isLiked,
+        isAnimating: widget.characterModel.isFavorit,
         duration: Duration(milliseconds: 400),
       ),
     );

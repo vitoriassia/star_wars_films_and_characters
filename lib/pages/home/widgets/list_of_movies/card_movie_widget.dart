@@ -95,7 +95,8 @@ class _CardMovieWidgetState extends State<CardMovieWidget> {
   }
 
   Widget get buildActions {
-    final icon = isLiked ? Icons.favorite : Icons.favorite_outline;
+    final icon =
+        widget.movieInfo.isFavorit ? Icons.favorite : Icons.favorite_outline;
     final color = Colors.white;
 
     return Container(
@@ -110,10 +111,10 @@ class _CardMovieWidgetState extends State<CardMovieWidget> {
                 color: color,
               ),
               onPressed: () => setState(() {
-                isLiked = !isLiked;
+                widget.movieInfo.isFavorit = !widget.movieInfo.isFavorit;
               }),
             ),
-            isAnimating: isLiked,
+            isAnimating: widget.movieInfo.isFavorit,
             duration: Duration(milliseconds: 400),
           ),
         ],
