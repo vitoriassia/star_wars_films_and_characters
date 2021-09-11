@@ -53,10 +53,10 @@ class _HomePageState extends State<HomePage> {
         children: [
           HeaderApp(
               onPressProfileButton: () {
-                onTabChange(3);
+                _selectedIndex == 3 ? onTabChange(0) : onTabChange(3);
               },
               onPressSiteButton: () {
-                onTabChange(4);
+                _selectedIndex == 4 ? onTabChange(0) : onTabChange(4);
               },
               siteIsSelected: _selectedIndex == 3,
               profileIsSelected: _selectedIndex == 4),
@@ -75,35 +75,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Center(
-  //     child: StreamBuilder<List<ContactModel>>(
-  //       stream: bloc.contactsOut,
-  //       builder: (context, snapshot) {
-  //         if (snapshot.hasData) {
-  //           return snapshot.data!.isEmpty
-  //               ? Container(
-  //                   child: Text(
-  //                     "Não há contatos cadastrados",
-  //                     style:
-  //                         TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-  //                   ),
-  //                 )
-  //               : SingleChildScrollView(
-  //                   child: Column(
-  //                     mainAxisAlignment: MainAxisAlignment.center,
-  //                     children: snapshot.data!
-  //                         .map((contact) =>
-  //                             ContactTileWidget(contactModel: contact))
-  //                         .toList(),
-  //                   ),
-  //                 );
-  //         } else {
-  //           return CircularProgressIndicator();
-  //         }
-  //       },
-  //     ),
-  //   );
-  // }
 }
