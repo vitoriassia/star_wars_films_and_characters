@@ -51,10 +51,10 @@ class _FavoritsCardItemState extends State<FavoritsCardItem> {
                       image: DecorationImage(
                           fit: BoxFit.fitHeight,
                           image: AssetImage(
-                            widget.favoritsModel.image,
+                            widget.favoritsModel.image ?? 'assets/no-photo.png',
                           )),
                       borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      color: Colors.redAccent,
+                      color: Colors.white,
                     ),
                   ),
                   Column(
@@ -64,7 +64,7 @@ class _FavoritsCardItemState extends State<FavoritsCardItem> {
                         style: TextStyle(
                             fontFamily: 'StarWars',
                             color: kPrimaryColor,
-                            fontSize: 11),
+                            fontSize: 13),
                       ),
                       Text(
                         widget.favoritsModel.subtitle,

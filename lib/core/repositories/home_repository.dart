@@ -6,30 +6,29 @@ class HomeRepository {
   final Api _api;
   HomeRepository(this._api);
   Future<List<CharacterModel>> getCharacters() async {
-    //  var response = await _api.getDataFrom(
-    //     "?format=json&results=15&page=1&inc=gender,name,email,picture&nat=br");
-    await Future.delayed(Duration(seconds: 2));
-    // List<CharacterModel> newList = response.data["results"]
-    //     .map<CharacterModel>((contact) => CharacterModel.fromJson(contact))
-    //     .toList();
-    // return newList;
-    return [
-      CharacterModel(
-          id: 1,
-          name: 'Luque Sky',
-          image: 'assets/mark.jpg',
-          actorName: 'Mark sd'),
-      CharacterModel(
-          id: 2,
-          name: 'Luque Sky',
-          image: 'assets/mark.jpg',
-          actorName: 'Mark Zukesdnberg'),
-      CharacterModel(
-          id: 3,
-          name: 'Luque Sky',
-          image: 'assets/mark.jpg',
-          actorName: 'Mark Zukenddberg')
-    ];
+    var response = await _api.getDataFrom("people/");
+
+    List<CharacterModel> newList = response.data["results"]
+        .map<CharacterModel>((contact) => CharacterModel.fromJson(contact))
+        .toList();
+    return newList;
+    // return [
+    //   CharacterModel(
+    //       id: 1,
+    //       name: 'Luque Sky',
+    //       image: 'assets/mark.jpg',
+    //       actorName: 'Mark sd'),
+    //   CharacterModel(
+    //       id: 2,
+    //       name: 'Luque Sky',
+    //       image: 'assets/mark.jpg',
+    //       actorName: 'Mark Zukesdnberg'),
+    //   CharacterModel(
+    //       id: 3,
+    //       name: 'Luque Sky',
+    //       image: 'assets/mark.jpg',
+    //       actorName: 'Mark Zukenddberg')
+    // ];
   }
 
   Future<List<MovieModel>> getMovies() async {

@@ -25,15 +25,16 @@ class _CharacterTileWidgetState extends State<CharacterTileWidget> {
       ),
       child: ListTile(
         title: Text(widget.characterModel.name),
-        subtitle: Text(widget.characterModel.actorName),
         trailing: buildActions,
         leading: Container(
-          width: 60.0,
-          height: 60.0,
+          width: 50.0,
+          height: 50.0,
           decoration: BoxDecoration(
-            color: const Color(0xff7c94b6),
+            color: Colors.white,
             image: DecorationImage(
-              image: AssetImage(widget.characterModel.image),
+              image: AssetImage(
+                'assets/no-photo.png',
+              ),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.all(Radius.circular(50.0)),

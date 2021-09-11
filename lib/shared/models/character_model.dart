@@ -1,20 +1,29 @@
 class CharacterModel {
   int id;
   String name;
-  String actorName;
-  String image;
+
+  String? image;
   bool isFavorit = false;
 
-  CharacterModel(
-      {required this.id,
-      required this.name,
-      required this.image,
-      required this.actorName});
+  CharacterModel({
+    required this.id,
+    required this.name,
+    required this.image,
+  });
 
   factory CharacterModel.fromJson(Map<String, dynamic> json) => CharacterModel(
-        id: 1,
-        name: json["name"]["first"] + " " + json["name"]["last"],
-        image: json["picture"]["large"],
-        actorName: json["actorName"],
+        id: getIdByUrl(json["url"]),
+        name: json["name"],
+        image: null,
       );
+}
+
+// fazendo isso pois a API nao oferece um id
+int getIdByUrl(String url) {
+  String myid = url.substring(29, 31);
+
+  if (myid[1] == "/")
+    return int.parse(myid[0]);
+  else
+    return int.parse(myid);
 }

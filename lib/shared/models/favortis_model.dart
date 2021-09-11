@@ -6,7 +6,7 @@ class FavoritsModel {
   String title;
   int id;
   String subtitle;
-  String image;
+  String? image;
   TypeFavorit typeFavorit;
   FavoritsModel(
       this.id, this.title, this.subtitle, this.image, this.typeFavorit);
@@ -19,10 +19,6 @@ class FavoritsModel {
       TypeFavorit.Movie);
 
   factory FavoritsModel.fromCharacters(CharacterModel characterModel) =>
-      FavoritsModel(
-          characterModel.id,
-          characterModel.name,
-          characterModel.actorName,
-          characterModel.image,
-          TypeFavorit.Character);
+      FavoritsModel(characterModel.id, characterModel.name, '',
+          characterModel.image, TypeFavorit.Character);
 }
