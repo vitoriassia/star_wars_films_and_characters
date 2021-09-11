@@ -1,4 +1,5 @@
 import 'package:star_wars_films_and_characters/core/repositories/home_repository.dart';
+import 'package:star_wars_films_and_characters/core/services/data_base_app.dart';
 import 'package:star_wars_films_and_characters/shared/enums.dart';
 import 'package:star_wars_films_and_characters/shared/models/character_model.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
@@ -8,10 +9,12 @@ import 'package:star_wars_films_and_characters/shared/models/movie_model.dart';
 
 class HomeBloc extends BlocBase {
   final HomeRepository repo;
+  final AppDatabaseProvider _dataBase;
   List<MovieModel> _movies = [];
   List<CharacterModel> _characters = [];
   List<FavoritsModel> _favorits = [];
-  HomeBloc(this.repo) {
+  String myMoji = '';
+  HomeBloc(this.repo, this._dataBase) {
     this.loadingOut = _loading.stream;
     this._loadingIn = _loading.sink;
   }
@@ -28,6 +31,7 @@ class HomeBloc extends BlocBase {
     _loadingIn.add(true);
     await loadingListOfCharacters();
     await loadingListOfMovies();
+    await getMyMojiDataBase();
     _loadingIn.add(false);
   }
 
@@ -47,6 +51,14 @@ class HomeBloc extends BlocBase {
     } catch (e) {
       _loading.addError(e);
     }
+  }
+
+  Future<void> addMojiToDb() async {
+    await _dataBase.addMojiToDatabase(this.myMoji);
+  }
+
+  Future<void> getMyMojiDataBase() async {
+    this.myMoji = await _dataBase.getMoji();
   }
 
   List<FavoritsModel> get listOfFavorits => _favorits;

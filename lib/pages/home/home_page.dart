@@ -7,7 +7,6 @@ import 'package:star_wars_films_and_characters/pages/home/widgets/list_of_favori
 import 'package:star_wars_films_and_characters/pages/home/widgets/list_of_movies/list_of_movie_widget.dart';
 import 'package:star_wars_films_and_characters/pages/home/widgets/moji_widget/moji_widget.dart';
 import 'package:star_wars_films_and_characters/pages/home/widgets/web_view_site_star_wars/web_view_site_start_wars.dart';
-import 'package:star_wars_films_and_characters/shared/constants.dart';
 import 'package:star_wars_films_and_characters/shared/widgets/app_scaffold.dart';
 import 'package:star_wars_films_and_characters/shared/widgets/header_app.dart';
 import 'package:star_wars_films_and_characters/shared/widgets/progress_indicator_yoda.dart';

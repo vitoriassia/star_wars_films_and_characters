@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttermoji/fluttermoji.dart';
+import 'package:star_wars_films_and_characters/pages/home/home_bloc.dart';
+import 'package:star_wars_films_and_characters/pages/home/home_module.dart';
 import 'package:star_wars_films_and_characters/shared/constants.dart';
 import 'package:star_wars_films_and_characters/shared/widgets/sweet_button.dart';
 
@@ -12,7 +14,8 @@ class MojiWidget extends StatefulWidget {
 class _MojiWidgetState extends State<MojiWidget> {
   bool isCustomize = false;
   FluttermojiFunctions _fluttermojiFunctions = FluttermojiFunctions();
-  String mysvg = '';
+
+  final HomeBloc bloc = HomeModule.to.getBloc<HomeBloc>();
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -22,11 +25,11 @@ class _MojiWidgetState extends State<MojiWidget> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              mysvg == '' || isCustomize
+              bloc.myMoji == '' || isCustomize
                   ? FluttermojiCircleAvatar(
                       radius: 100, backgroundColor: Colors.white)
                   : SvgPicture.string(
-                      mysvg,
+                      bloc.myMoji,
                       height: 150,
                     ),
               isCustomize
@@ -38,8 +41,9 @@ class _MojiWidgetState extends State<MojiWidget> {
                             .decodeFluttermojifromString(encoded);
                         setState(() {
                           isCustomize = false;
-                          mysvg = newSvg;
+                          bloc.myMoji = newSvg;
                         });
+                        await bloc.addMojiToDb();
                       },
                       text: "Confirmar Alterações",
                       icon: Icons.check_circle,
