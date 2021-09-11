@@ -3,6 +3,7 @@ import 'package:star_wars_films_and_characters/pages/home/home_bloc.dart';
 import 'package:star_wars_films_and_characters/pages/home/home_module.dart';
 import 'package:star_wars_films_and_characters/pages/home/widgets/list_of_movies/card_movie_widget.dart';
 import 'package:star_wars_films_and_characters/shared/constants.dart';
+import 'package:star_wars_films_and_characters/shared/enums.dart';
 import 'package:star_wars_films_and_characters/shared/models/favortis_model.dart';
 
 class ListOfMovieWidget extends StatelessWidget {
@@ -27,7 +28,8 @@ class ListOfMovieWidget extends StatelessWidget {
                           bloc.movies[index],
                         ),
                       )
-                    : bloc.removeItemFavoritModel(bloc.characters[index].id);
+                    : bloc.removeItemFavoritModel(
+                        bloc.characters[index].id, TypeFavorit.Movie);
               },
               movieInfo: bloc.movies[index],
             );

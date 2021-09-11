@@ -1,4 +1,5 @@
 import 'package:star_wars_films_and_characters/core/repositories/home_repository.dart';
+import 'package:star_wars_films_and_characters/shared/enums.dart';
 import 'package:star_wars_films_and_characters/shared/models/character_model.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:rxdart/rxdart.dart';
@@ -52,8 +53,9 @@ class HomeBloc extends BlocBase {
 
   addItemFavoritModel(FavoritsModel favoritsModel) =>
       _favorits.add(favoritsModel);
-  removeItemFavoritModel(int favoritsId) =>
-      _favorits.removeWhere((element) => element.id == favoritsId);
+  removeItemFavoritModel(int favoritsId, TypeFavorit type) =>
+      _favorits.removeWhere(
+          (element) => element.id == favoritsId && element.typeFavorit == type);
 
   @override
   void dispose() {

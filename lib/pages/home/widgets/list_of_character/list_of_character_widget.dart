@@ -3,6 +3,7 @@ import 'package:star_wars_films_and_characters/pages/home/home_bloc.dart';
 import 'package:star_wars_films_and_characters/pages/home/home_module.dart';
 import 'package:star_wars_films_and_characters/pages/home/widgets/list_of_character/character_tile_widget.dart';
 import 'package:star_wars_films_and_characters/shared/constants.dart';
+import 'package:star_wars_films_and_characters/shared/enums.dart';
 import 'package:star_wars_films_and_characters/shared/models/favortis_model.dart';
 
 class ListOfCharacterWidget extends StatelessWidget {
@@ -26,7 +27,8 @@ class ListOfCharacterWidget extends StatelessWidget {
                       ? bloc.addItemFavoritModel(FavoritsModel.fromCharacters(
                           bloc.characters[index],
                         ))
-                      : bloc.removeItemFavoritModel(bloc.characters[index].id);
+                      : bloc.removeItemFavoritModel(
+                          bloc.characters[index].id, TypeFavorit.Character);
                 },
                 characterModel: bloc.characters[index],
               );
