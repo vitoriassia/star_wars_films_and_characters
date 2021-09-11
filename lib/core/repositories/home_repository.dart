@@ -18,17 +18,17 @@ class HomeRepository {
           id: 1,
           name: 'Luque Sky',
           image: 'assets/mark.jpg',
-          actorName: 'Mark Zukenberg'),
+          actorName: 'Mark sd'),
       CharacterModel(
           id: 2,
           name: 'Luque Sky',
           image: 'assets/mark.jpg',
-          actorName: 'Mark Zukenberg'),
+          actorName: 'Mark Zukesdnberg'),
       CharacterModel(
           id: 3,
           name: 'Luque Sky',
           image: 'assets/mark.jpg',
-          actorName: 'Mark Zukenberg')
+          actorName: 'Mark Zukenddberg')
     ];
   }
 
@@ -43,9 +43,9 @@ class HomeRepository {
     return [
       MovieModel(1, false, 'A Ameaça Fantasma - Episódigo 1',
           'assets/banner-1.jpeg', '21/08/2019'),
-      MovieModel(1, false, 'A Ameaça Fantasma - Episódigo 1',
+      MovieModel(2, false, 'A Ameaça Fantasma - Episódigo 1',
           'assets/banner-1.jpeg', '21/08/2019'),
-      MovieModel(1, false, 'A Ameaça Fantasma - Episódigo 1',
+      MovieModel(3, false, 'A Ameaça Fantasma - Episódigo 1',
           'assets/banner-1.jpeg', '21/08/2019')
     ];
   }

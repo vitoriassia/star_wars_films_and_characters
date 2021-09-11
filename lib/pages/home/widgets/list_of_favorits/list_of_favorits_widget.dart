@@ -30,14 +30,28 @@ class _ListOfFavoritsWidgetState extends State<ListOfFavoritsWidget> {
                 key: listKey,
                 initialItemCount: bloc.listOfFavorits.length,
                 itemBuilder: (context, index, animation) {
-                  return slideIt(context, index, animation); // Refer step 3
+                  return slideIt(
+                    context,
+                    index,
+                    animation,
+                  ); // Refer step 3
                 },
               ),
             ))
-        : Container();
+        : Center(
+            child: Text(
+              'Nenhum favorito selecionado.',
+              style: optionStyle,
+              textAlign: TextAlign.center,
+            ),
+          );
   }
 
-  Widget slideIt(BuildContext context, int index, animation) {
+  Widget slideIt(
+    BuildContext context,
+    int index,
+    animation,
+  ) {
     FavoritsModel item = bloc.listOfFavorits[index];
 
     return SlideTransition(
@@ -45,17 +59,18 @@ class _ListOfFavoritsWidgetState extends State<ListOfFavoritsWidget> {
         begin: const Offset(-1, 0),
         end: Offset(0, 0),
       ).animate(animation),
-      child: FavoritsCardItem(
-        favoritsModel: item,
-        removeItem: () {
-          bloc.removeItembyFavoritModel(item);
-          if (bloc.listOfFavorits.isEmpty)
-            setState(() {});
-          else
-            listKey.currentState!.removeItem(
-                index, (_, animation) => slideIt(context, index, animation),
-                duration: const Duration(milliseconds: 200));
-        },
+      child: SizeTransition(
+        axis: Axis.vertical,
+        sizeFactor: animation,
+        child: FavoritsCardItem(
+            favoritsModel: item,
+            removeItem: () async {
+              listKey.currentState!.removeItem(
+                  index, (_, animation) => slideIt(context, index, animation),
+                  duration: const Duration(milliseconds: 400));
+              await Future.delayed(Duration(milliseconds: 600));
+              bloc.removeItembyFavoritModel(item);
+            }),
       ),
     );
   }
