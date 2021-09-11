@@ -7,6 +7,7 @@ const kSecondColor = Color(0xfffeef94);
 const kBegeColorStarWars = Color(0xfff3dcb3);
 const kAmareloColorStarWars = Color(0xfffee123);
 const kGreenStarWars = Color(0xff3cbfaf);
+const kRedStarWars = Color(0xffce102c);
 
 const kAppTitleBlack =
     TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.bold);

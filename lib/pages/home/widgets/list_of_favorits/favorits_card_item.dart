@@ -150,7 +150,7 @@ class HeadCardFavorits extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.movie,
+                          Icons.person,
                           color: Colors.white,
                         ),
                         SizedBox(
@@ -171,7 +171,9 @@ class HeadCardFavorits extends StatelessWidget {
           ),
         ),
         decoration: BoxDecoration(
-          color: kPrimaryColor,
+          color: typeFavorit == TypeFavorit.Character
+              ? kGreenStarWars
+              : kRedStarWars,
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(4),
             topLeft: Radius.circular(4),
