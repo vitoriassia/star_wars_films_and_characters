@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:star_wars_films_and_characters/shared/constants.dart';
 import 'package:star_wars_films_and_characters/shared/enums.dart';
 import 'package:star_wars_films_and_characters/shared/models/favortis_model.dart';
+import 'package:star_wars_films_and_characters/shared/widgets/heart_animation_widget.dart';
 
 class FavoritsCardItem extends StatefulWidget {
   final FavoritsModel favoritsModel;
-
-  FavoritsCardItem({required this.favoritsModel});
+  final Function() removeItem;
+  FavoritsCardItem({required this.favoritsModel, required this.removeItem});
 
   @override
   _FavoritsCardItemState createState() => _FavoritsCardItemState();
@@ -21,7 +22,7 @@ class _FavoritsCardItemState extends State<FavoritsCardItem> {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Container(
         width: double.infinity,
-        height: 150,
+        height: 170,
         color: Colors.white,
         child: Column(
           children: <Widget>[
@@ -32,14 +33,12 @@ class _FavoritsCardItemState extends State<FavoritsCardItem> {
             //   width: double.infinity,
             //   fit: BoxFit.cover,
             // ),
-            Stack(
-              children: [
-                HeadCardFavorits(
-                  typeFavorit: widget.favoritsModel.typeFavorit,
-                )
-                // buildActions
-              ],
+
+            HeadCardFavorits(
+              typeFavorit: widget.favoritsModel.typeFavorit,
+              buildActions: buildActions,
             ),
+
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -90,43 +89,31 @@ class _FavoritsCardItemState extends State<FavoritsCardItem> {
     );
   }
 
-  // Widget get buildActions {
-  //   final icon = widget.favoritsModel.isFavorit
-  //       ? Icons.favorite
-  //       : Icons.favorite_outline;
-  //   final color = Colors.white;
+  Widget get buildActions {
+    final icon = Icons.favorite;
 
-  //   return Container(
-  //     padding: EdgeInsets.all(4),
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.end,
-  //       children: [
-  //         HeartAnimationWidget(
-  //           child: IconButton(
-  //             icon: Icon(
-  //               icon,
-  //               color: color,
-  //             ),
-  //             onPressed: () => setState(() {
-  //               widget.favoritsModel.isFavorit =
-  //                   !widget.favoritsModel.isFavorit;
-  //             }),
-  //           ),
-  //           isAnimating: widget.favoritsModel.isFavorit,
-  //           duration: Duration(milliseconds: 400),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+    final color = Colors.white;
+
+    return HeartAnimationWidget(
+      child: IconButton(
+        icon: Icon(
+          icon,
+          color: color,
+        ),
+        onPressed: () => setState(() {
+          widget.removeItem();
+        }),
+      ),
+      isAnimating: false,
+      duration: Duration(milliseconds: 400),
+    );
+  }
 }
 
 class HeadCardFavorits extends StatelessWidget {
   final TypeFavorit? typeFavorit;
-
-  HeadCardFavorits({
-    this.typeFavorit,
-  });
+  final buildActions;
+  HeadCardFavorits({this.typeFavorit, this.buildActions});
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -135,47 +122,53 @@ class HeadCardFavorits extends StatelessWidget {
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: typeFavorit == TypeFavorit.Movie
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.movie,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Filme',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 18,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              typeFavorit == TypeFavorit.Movie
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.movie,
                           color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.movie,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Personagem',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 18,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Filme',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.movie,
                           color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Personagem',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+              buildActions,
+            ],
+          ),
         ),
         decoration: BoxDecoration(
           color: kPrimaryColor,

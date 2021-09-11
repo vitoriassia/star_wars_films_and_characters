@@ -56,6 +56,18 @@ class HomeBloc extends BlocBase {
   removeItemFavoritModel(int favoritsId, TypeFavorit type) =>
       _favorits.removeWhere(
           (element) => element.id == favoritsId && element.typeFavorit == type);
+  removeItembyFavoritModel(
+    FavoritsModel favoritsModel,
+  ) {
+    _favorits.remove(favoritsModel);
+    favoritsModel.typeFavorit == TypeFavorit.Character
+        ? _characters.forEach((element) {
+            if (element.id == favoritsModel.id) element.isFavorit = false;
+          })
+        : _movies.forEach((element) {
+            if (element.id == favoritsModel.id) element.isFavorit = false;
+          });
+  }
 
   @override
   void dispose() {
