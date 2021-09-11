@@ -5,7 +5,9 @@ import 'package:star_wars_films_and_characters/shared/widgets/heart_animation_wi
 
 class CharacterTileWidget extends StatefulWidget {
   final CharacterModel characterModel;
-  CharacterTileWidget({required this.characterModel});
+  final Function(bool) onTapFavorit;
+  CharacterTileWidget(
+      {required this.characterModel, required this.onTapFavorit});
 
   @override
   _CharacterTileWidgetState createState() => _CharacterTileWidgetState();
@@ -19,7 +21,7 @@ class _CharacterTileWidgetState extends State<CharacterTileWidget> {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
-        side: BorderSide(color: kPrimaryColor, width: 1),
+        side: BorderSide(color: kPrimaryColor, width: 2),
       ),
       child: ListTile(
         title: Text(widget.characterModel.name),
@@ -49,7 +51,7 @@ class _CharacterTileWidgetState extends State<CharacterTileWidget> {
     final icon = widget.characterModel.isFavorit
         ? Icons.favorite
         : Icons.favorite_outline;
-    final color = Colors.red;
+    final color = kPrimaryColor;
 
     return Container(
       padding: EdgeInsets.all(4),
@@ -61,6 +63,7 @@ class _CharacterTileWidgetState extends State<CharacterTileWidget> {
           ),
           onPressed: () => setState(() {
             widget.characterModel.isFavorit = !widget.characterModel.isFavorit;
+            widget.onTapFavorit(widget.characterModel.isFavorit);
           }),
         ),
         isAnimating: widget.characterModel.isFavorit,

@@ -15,14 +15,17 @@ class HomeRepository {
     // return newList;
     return [
       CharacterModel(
+          id: 1,
           name: 'Luque Sky',
           image: 'assets/mark.jpg',
           actorName: 'Mark Zukenberg'),
       CharacterModel(
+          id: 2,
           name: 'Luque Sky',
           image: 'assets/mark.jpg',
           actorName: 'Mark Zukenberg'),
       CharacterModel(
+          id: 3,
           name: 'Luque Sky',
           image: 'assets/mark.jpg',
           actorName: 'Mark Zukenberg')

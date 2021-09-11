@@ -5,8 +5,9 @@ import 'package:star_wars_films_and_characters/shared/widgets/heart_animation_wi
 
 class CardMovieWidget extends StatefulWidget {
   final MovieModel movieInfo;
+  final Function(bool) onTapFavorit;
 
-  CardMovieWidget({required this.movieInfo});
+  CardMovieWidget({required this.movieInfo, required this.onTapFavorit});
 
   @override
   _CardMovieWidgetState createState() => _CardMovieWidgetState();
@@ -112,6 +113,7 @@ class _CardMovieWidgetState extends State<CardMovieWidget> {
               ),
               onPressed: () => setState(() {
                 widget.movieInfo.isFavorit = !widget.movieInfo.isFavorit;
+                widget.onTapFavorit(widget.movieInfo.isFavorit);
               }),
             ),
             isAnimating: widget.movieInfo.isFavorit,
