@@ -27,21 +27,16 @@ class _CharacterTileWidgetState extends State<CharacterTileWidget> {
         title: Text(widget.characterModel.name),
         trailing: buildActions,
         leading: Container(
-          width: 50.0,
-          height: 50.0,
+          width: 80.0,
+          height: 80.0,
           decoration: BoxDecoration(
-            color: Colors.white,
             image: DecorationImage(
-              image: AssetImage(
-                'assets/no-photo.png',
-              ),
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(50.0)),
-            border: Border.all(
-              color: kPrimaryColor,
-              width: 1.0,
-            ),
+                fit: BoxFit.fitHeight,
+                image: AssetImage(
+                  widget.characterModel.image ?? 'assets/no-photo.png',
+                )),
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            color: Colors.white,
           ),
         ),
       ),
