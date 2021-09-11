@@ -3,14 +3,17 @@ import 'package:star_wars_films_and_characters/shared/constants.dart';
 
 class ProfileButton extends StatelessWidget {
   final Function() onPress;
-  ProfileButton(this.onPress);
+  final bool isSelected;
+  ProfileButton(this.onPress, this.isSelected);
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPress,
       child: Card(
+        color: isSelected ? kPrimaryColor : Colors.white,
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: kPrimaryColor, width: 2),
+          side: BorderSide(
+              color: isSelected ? Colors.white : kPrimaryColor, width: 2),
           borderRadius: BorderRadius.circular(50),
         ),
         elevation: 10,
@@ -21,7 +24,8 @@ class ProfileButton extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(Icons.person, color: kPrimaryColor)),
+            child: Icon(Icons.person,
+                color: isSelected ? Colors.white : kPrimaryColor)),
       ),
     );
   }

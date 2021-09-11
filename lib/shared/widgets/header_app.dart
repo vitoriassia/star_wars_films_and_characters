@@ -6,7 +6,13 @@ import 'package:star_wars_films_and_characters/shared/widgets/sweet_button.dart'
 class HeaderApp extends StatelessWidget {
   final Function() onPressProfileButton;
   final Function() onPressSiteButton;
-  HeaderApp(this.onPressProfileButton, this.onPressSiteButton);
+  final bool siteIsSelected;
+  final bool profileIsSelected;
+  HeaderApp(
+      {required this.onPressProfileButton,
+      required this.onPressSiteButton,
+      required this.siteIsSelected,
+      required this.profileIsSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +27,11 @@ class HeaderApp extends StatelessWidget {
                 onPressed: onPressProfileButton,
                 text: "Site",
                 icon: Icons.language,
-                textcolor: Colors.white,
-                color: kPrimaryColor,
-                borderColor: Colors.white,
+                textcolor: siteIsSelected ? Colors.white : kPrimaryColor,
+                color: siteIsSelected ? kPrimaryColor : Colors.white,
+                borderColor: siteIsSelected ? Colors.white : kPrimaryColor,
                 isEnable: true),
-            ProfileButton(onPressSiteButton),
+            ProfileButton(onPressSiteButton, profileIsSelected),
           ],
         ),
       ),

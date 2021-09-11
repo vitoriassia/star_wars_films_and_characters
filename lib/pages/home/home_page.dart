@@ -51,11 +51,15 @@ class _HomePageState extends State<HomePage> {
       bottomTabNavigationBar: TabNavigation(_selectedIndex, onTabChange),
       body: Column(
         children: [
-          HeaderApp(() {
-            onTabChange(3);
-          }, () {
-            onTabChange(4);
-          }),
+          HeaderApp(
+              onPressProfileButton: () {
+                onTabChange(3);
+              },
+              onPressSiteButton: () {
+                onTabChange(4);
+              },
+              siteIsSelected: _selectedIndex == 3,
+              profileIsSelected: _selectedIndex == 4),
           StreamBuilder<bool>(
             stream: bloc.loadingOut,
             builder: (BuildContext context, AsyncSnapshot snapshot) {
