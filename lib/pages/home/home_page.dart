@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:star_wars_films_and_characters/pages/home/widgets/list_of_character/list_of_character_widget.dart';
 import 'package:star_wars_films_and_characters/pages/home/widgets/list_of_favorits/list_of_favorits_widget.dart';
 import 'package:star_wars_films_and_characters/pages/home/widgets/list_of_movies/list_of_movie_widget.dart';
+import 'package:star_wars_films_and_characters/pages/home/widgets/moji_widget/moji_widget.dart';
 import 'package:star_wars_films_and_characters/pages/home/widgets/web_view_site_star_wars/web_view_site_start_wars.dart';
 import 'package:star_wars_films_and_characters/shared/constants.dart';
 import 'package:star_wars_films_and_characters/shared/widgets/app_scaffold.dart';
@@ -30,10 +31,7 @@ class _HomePageState extends State<HomePage> {
       ListOfCharacterWidget(),
       ListOfFavoritsWidget(),
       WebViewStiteStarWars(),
-      Text(
-        'Profile',
-        style: optionStyle,
-      ),
+      MojiWidget(),
     ];
   }
 
