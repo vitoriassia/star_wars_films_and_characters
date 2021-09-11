@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class Api {
-  static const apiUrl = 'https://randomuser.me/api/';
+  static const apiUrl = 'https://swapi.dev/api/';
 
   final dio = Dio()..options.baseUrl = apiUrl;
 

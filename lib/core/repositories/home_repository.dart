@@ -33,20 +33,19 @@ class HomeRepository {
   }
 
   Future<List<MovieModel>> getMovies() async {
-    //  var response = await _api.getDataFrom(
-    //     "?format=json&results=15&page=1&inc=gender,name,email,picture&nat=br");
-    await Future.delayed(Duration(seconds: 2));
-    // List<CharacterModel> newList = response.data["results"]
-    //     .map<CharacterModel>((contact) => CharacterModel.fromJson(contact))
-    //     .toList();
-    // return newList;
-    return [
-      MovieModel(1, false, 'A Ameaça Fantasma - Episódigo 1',
-          'assets/banner-1.jpeg', '21/08/2019'),
-      MovieModel(2, false, 'A Ameaça Fantasma - Episódigo 1',
-          'assets/banner-1.jpeg', '21/08/2019'),
-      MovieModel(3, false, 'A Ameaça Fantasma - Episódigo 1',
-          'assets/banner-1.jpeg', '21/08/2019')
-    ];
+    var response = await _api.getDataFrom("films/");
+
+    List<MovieModel> newList = response.data["results"]
+        .map<MovieModel>((contact) => MovieModel.fromJson(contact))
+        .toList();
+    return newList;
+    // return [
+    //   MovieModel(1, false, 'A Ameaça Fantasma - Episódigo 1',
+    //       'assets/banner-1.jpeg', '21/08/2019'),
+    //   MovieModel(2, false, 'A Ameaça Fantasma - Episódigo 1',
+    //       'assets/banner-1.jpeg', '21/08/2019'),
+    //   MovieModel(3, false, 'A Ameaça Fantasma - Episódigo 1',
+    //       'assets/banner-1.jpeg', '21/08/2019')
+    // ];
   }
 }
