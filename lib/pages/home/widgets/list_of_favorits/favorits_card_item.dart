@@ -84,7 +84,7 @@ class _FavoritsCardItemState extends State<FavoritsCardItem> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-      elevation: 8,
+      elevation: 4,
       margin: EdgeInsets.all(10),
     );
   }

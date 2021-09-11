@@ -70,6 +70,7 @@ class _ListOfFavoritsWidgetState extends State<ListOfFavoritsWidget> {
                   duration: const Duration(milliseconds: 400));
               await Future.delayed(Duration(milliseconds: 600));
               bloc.removeItembyFavoritModel(item);
+              setState(() {});
             }),
       ),
     );
