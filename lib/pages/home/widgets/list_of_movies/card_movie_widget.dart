@@ -17,81 +17,116 @@ class _CardMovieWidgetState extends State<CardMovieWidget> {
   bool isLiked = false;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      semanticContainer: true,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      child: Container(
-        width: double.infinity,
-        height: 210,
-        color: kPrimaryColorDark,
-        child: Column(
-          children: <Widget>[
-            // FadeInImage.assetNetwork(
-            //   placeholder: 'assets/loadings/loadingRooms2.gif',
-            //   image: movieInfo.photo,
-            //   height: 180,
-            //   width: double.infinity,
-            //   fit: BoxFit.cover,
-            // ),
-            Stack(
-              children: [
-                Image.asset(
-                  widget.movieInfo.photo,
-                  height: 150,
-                  width: double.infinity,
-                  fit: BoxFit.fill,
-                ),
-                buildActions
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return GestureDetector(
+      onDoubleTap: () {
+        setState(() {
+          isLiked = true;
+        });
+        widget.movieInfo.isFavorit = !widget.movieInfo.isFavorit;
+        widget.onTapFavorit(widget.movieInfo.isFavorit);
+      },
+      child: Card(
+        semanticContainer: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        child: Container(
+          width: double.infinity,
+          height: 210,
+          color: kPrimaryColorDark,
+          child: Stack(
+            children: [
+              Column(
                 children: <Widget>[
-                  Text(
-                    widget.movieInfo.name,
-                    style: TextStyle(
-                        decorationColor: kPrimaryColor,
-                        fontFamily: 'StarWars',
-                        color: Colors.white,
-                        fontSize: 14),
+                  // FadeInImage.assetNetwork(
+                  //   placeholder: 'assets/loadings/loadingRooms2.gif',
+                  //   image: movieInfo.photo,
+                  //   height: 180,
+                  //   width: double.infinity,
+                  //   fit: BoxFit.cover,
+                  // ),
+                  Stack(
+                    children: [
+                      Image.asset(
+                        widget.movieInfo.photo,
+                        height: 150,
+                        width: double.infinity,
+                        fit: BoxFit.fill,
+                      ),
+                      buildActions
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          widget.movieInfo.name,
+                          style: TextStyle(
+                              decorationColor: kPrimaryColor,
+                              fontFamily: 'StarWars',
+                              color: Colors.white,
+                              fontSize: 14),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 6),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.date_range,
+                          size: 17,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 10,
+                          width: 5,
+                        ),
+                        Text(
+                          widget.movieInfo.releaseDateOf,
+                          style: TextStyle(
+                              decorationColor: kPrimaryColor,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 6),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.date_range,
-                    size: 17,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    height: 10,
-                    width: 5,
-                  ),
-                  Text(
-                    widget.movieInfo.releaseDateOf,
-                    style: TextStyle(
-                        decorationColor: kPrimaryColor,
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: Opacity(
+                    opacity: isLiked ? 1.0 : 0,
+                    child: HeartAnimationWidget(
+                      isAnimating: isLiked,
+                      onEnd: () {
+                        setState(() {
+                          isLiked = false;
+                        });
+                      },
+                      duration: Duration(milliseconds: 400),
+                      child: Icon(
+                        Icons.favorite,
+                        size: 100,
                         color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 11),
-                  )
-                ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        elevation: 8,
+        margin: EdgeInsets.all(10),
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      elevation: 8,
-      margin: EdgeInsets.all(10),
     );
   }
 

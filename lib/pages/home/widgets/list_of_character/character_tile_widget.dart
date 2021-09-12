@@ -18,25 +18,33 @@ class _CharacterTileWidgetState extends State<CharacterTileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-        side: BorderSide(color: kPrimaryColor, width: 2),
-      ),
-      child: ListTile(
-        title: Text(widget.characterModel.name),
-        trailing: buildActions,
-        leading: Container(
-          width: 80.0,
-          height: 80.0,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.fitHeight,
-                image: AssetImage(
-                  widget.characterModel.image ?? 'assets/no-photo.png',
-                )),
-            borderRadius: BorderRadius.all(Radius.circular(8.0)),
-            color: Colors.white,
+    return GestureDetector(
+      onDoubleTap: () {
+        setState(() {
+          widget.characterModel.isFavorit = !widget.characterModel.isFavorit;
+          widget.onTapFavorit(widget.characterModel.isFavorit);
+        });
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(color: kPrimaryColor, width: 2),
+        ),
+        child: ListTile(
+          title: Text(widget.characterModel.name),
+          trailing: buildActions,
+          leading: Container(
+            width: 80.0,
+            height: 80.0,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.fitHeight,
+                  image: AssetImage(
+                    widget.characterModel.image ?? 'assets/no-photo.png',
+                  )),
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              color: Colors.white,
+            ),
           ),
         ),
       ),
