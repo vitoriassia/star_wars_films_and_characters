@@ -1,16 +1,31 @@
-# star_wars_films_and_characters
+# Star Wars Filmes e Personagens
 
-A new Flutter project.
+Aplicativo para ver persoganes e filmes de Star Wars e Criar seu próprio avatar!!
 
-## Getting Started
+<div style="text-align: center">
+    <a href="https://github.com/vitoriassia/Help-you-with-flutter/blob/master/lib/ui/screens/home_screen/home_screen.dart">
+    <img src="https://github.com/vitoriassia/Help-you-with-flutter/blob/master/assets/images_readme/sweet_button_image/sweet_button_item_list.png" /></a>
+</div>
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+# Telas Aplicativo:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<div style="text-align: center">
+    <table>
+        <tr>
+            <td style="text-align: center">
+                    <img src="https://github.com/vitoriassia/star_wars_films_and_characters/blob/master/assets/image_readme/filmes.jpeg" >
+            </td>
+            <td style="text-align: center">
+                  <img src="https://github.com/vitoriassia/star_wars_films_and_characters/blob/master/assets/image_readme/personagens.jpeg" >
+            </td>
+             <td style="text-align: center">
+               <img src="https://github.com/vitoriassia/star_wars_films_and_characters/blob/master/assets/image_readme/favoritos.jpeg" >
+            </td>
+             <td style="text-align: center">
+               <img src="https://github.com/vitoriassia/star_wars_films_and_characters/blob/master/assets/image_readme/site.jpeg" >
+            </td>
+        </tr>
+    </table>
+</div>
