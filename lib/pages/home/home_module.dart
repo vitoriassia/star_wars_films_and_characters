@@ -14,7 +14,6 @@ class HomeModule extends ModuleWidget {
         Bloc(
           (i) => HomeBloc(
             to.getDependency<HomeRepository>(),
-            to.getDependency<AppDatabaseProvider>(),
           ),
         ),
       ];
@@ -22,8 +21,10 @@ class HomeModule extends ModuleWidget {
   //Inject the dependencies
   @override
   List<Dependency> get dependencies => [
-        Dependency((i) => HomeRepository(AppModule.to.getDependency<Api>())),
-        Dependency((i) => AppDatabaseProvider.db),
+        Dependency(
+          (i) => HomeRepository(
+              AppModule.to.getDependency<Api>(), AppDatabaseProvider.db),
+        ),
       ];
 
   //main widget

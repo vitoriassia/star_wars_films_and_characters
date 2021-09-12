@@ -1,5 +1,4 @@
 import 'package:star_wars_films_and_characters/core/repositories/home_repository.dart';
-import 'package:star_wars_films_and_characters/core/services/data_base_app.dart';
 import 'package:star_wars_films_and_characters/shared/enums.dart';
 import 'package:star_wars_films_and_characters/shared/models/character_model.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
@@ -9,12 +8,12 @@ import 'package:star_wars_films_and_characters/shared/models/movie_model.dart';
 
 class HomeBloc extends BlocBase {
   final HomeRepository repo;
-  final AppDatabaseProvider _dataBase;
+
   List<MovieModel> _movies = [];
   List<CharacterModel> _characters = [];
   List<FavoritsModel> _favorits = [];
   String myMoji = '';
-  HomeBloc(this.repo, this._dataBase) {
+  HomeBloc(this.repo) {
     this.loadingOut = _loading.stream;
     this._loadingIn = _loading.sink;
   }
@@ -31,7 +30,7 @@ class HomeBloc extends BlocBase {
     _loadingIn.add(true);
     await loadingListOfCharacters();
     await loadingListOfMovies();
-    await getMyMojiDataBase();
+    await getMyMojiDb();
     await loadingMyFavorits();
     _loadingIn.add(false);
   }
@@ -56,7 +55,7 @@ class HomeBloc extends BlocBase {
 
   Future<void> loadingMyFavorits() async {
     try {
-      var newList = await _dataBase.getAllFavorit();
+      var newList = await repo.getAllFavorit();
       _favorits.addAll(newList);
       refreshListCharactersAndMoviesOfFavorits();
     } catch (e) {
@@ -77,20 +76,19 @@ class HomeBloc extends BlocBase {
   }
 
   Future<void> addMojiToDb() async {
-    await _dataBase.addMojiToDatabase(this.myMoji);
+    await repo.addMoji(this.myMoji);
   }
 
   Future<void> addFavoritDb(FavoritsModel favoritsModel) async {
-    await _dataBase.addFavoritToDatabase(favoritsModel);
+    await repo.addFavorit(favoritsModel);
   }
 
   Future<void> removeFavoritDb(int id, TypeFavorit type) async {
-    await _dataBase.deleteFavoritWithId(
-        id, type == TypeFavorit.Movie ? 'movie' : 'character');
+    await repo.deleteFavorit(id, type);
   }
 
-  Future<void> getMyMojiDataBase() async {
-    this.myMoji = await _dataBase.getMoji();
+  Future<void> getMyMojiDb() async {
+    this.myMoji = await repo.getMyMoji();
   }
 
   List<FavoritsModel> get listOfFavorits => _favorits;

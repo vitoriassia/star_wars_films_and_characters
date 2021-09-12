@@ -1,10 +1,14 @@
 import 'package:star_wars_films_and_characters/core/services/api.dart';
+import 'package:star_wars_films_and_characters/core/services/data_base_app.dart';
+import 'package:star_wars_films_and_characters/shared/enums.dart';
 import 'package:star_wars_films_and_characters/shared/models/character_model.dart';
+import 'package:star_wars_films_and_characters/shared/models/favortis_model.dart';
 import 'package:star_wars_films_and_characters/shared/models/movie_model.dart';
 
 class HomeRepository {
   final Api _api;
-  HomeRepository(this._api);
+  final AppDatabaseProvider _dataBase;
+  HomeRepository(this._api, this._dataBase);
   Future<List<CharacterModel>> getCharacters() async {
     var response = await _api.getDataFrom("people/");
 
@@ -12,23 +16,6 @@ class HomeRepository {
         .map<CharacterModel>((contact) => CharacterModel.fromJson(contact))
         .toList();
     return newList;
-    // return [
-    //   CharacterModel(
-    //       id: 1,
-    //       name: 'Luque Sky',
-    //       image: 'assets/mark.jpg',
-    //       actorName: 'Mark sd'),
-    //   CharacterModel(
-    //       id: 2,
-    //       name: 'Luque Sky',
-    //       image: 'assets/mark.jpg',
-    //       actorName: 'Mark Zukesdnberg'),
-    //   CharacterModel(
-    //       id: 3,
-    //       name: 'Luque Sky',
-    //       image: 'assets/mark.jpg',
-    //       actorName: 'Mark Zukenddberg')
-    // ];
   }
 
   Future<List<MovieModel>> getMovies() async {
@@ -38,13 +25,26 @@ class HomeRepository {
         .map<MovieModel>((contact) => MovieModel.fromJson(contact))
         .toList();
     return newList;
-    // return [
-    //   MovieModel(1, false, 'A Ameaça Fantasma - Episódigo 1',
-    //       'assets/banner-1.jpeg', '21/08/2019'),
-    //   MovieModel(2, false, 'A Ameaça Fantasma - Episódigo 1',
-    //       'assets/banner-1.jpeg', '21/08/2019'),
-    //   MovieModel(3, false, 'A Ameaça Fantasma - Episódigo 1',
-    //       'assets/banner-1.jpeg', '21/08/2019')
-    // ];
+  }
+
+  Future<List<FavoritsModel>> getAllFavorit() async {
+    return await _dataBase.getAllFavorit();
+  }
+
+  Future<void> addMoji(String moji) async {
+    await _dataBase.addMojiToDatabase(moji);
+  }
+
+  Future<void> addFavorit(FavoritsModel favoritsModel) async {
+    await _dataBase.addFavoritToDatabase(favoritsModel);
+  }
+
+  Future<void> deleteFavorit(int id, TypeFavorit type) async {
+    await _dataBase.deleteFavoritWithId(
+        id, type == TypeFavorit.Movie ? 'movie' : 'character');
+  }
+
+  Future<String> getMyMoji() async {
+    return await _dataBase.getMoji();
   }
 }
