@@ -74,14 +74,19 @@ foo@terminal:~$ flutter run --release
 
 ## Adicione e remova seus favoritos com facilidade
 
-1- > Adicionar com dois cliques.
-
-
-![LIKE](https://github.com/vitoriassia/star_wars_films_and_characters/blob/master/assets/image_readme/favoritos1.gif)
-
-
-2-> Remover com um clique no ícone.
-
-
-![REMOVENDO](https://github.com/vitoriassia/star_wars_films_and_characters/blob/master/assets/image_readme/favoritos2.gif)
-
+<div style="text-align: center">
+    <table>
+        <tr>
+            <td style="text-align: center">
+              <p>
+                    1- > Adicionar com dois cliques. </p>
+                    <img src="https://github.com/vitoriassia/star_wars_films_and_characters/blob/master/assets/image_readme/favoritos1.gif" >
+            </td>
+            <td style="text-align: center">
+            <p>
+                    2-> Remover com um clique no ícone. </p>
+                  <img src="https://github.com/vitoriassia/star_wars_films_and_characters/blob/master/assets/image_readme/favoritos2.gif" >
+            </td>
+        </tr>
+    </table>
+</div>
