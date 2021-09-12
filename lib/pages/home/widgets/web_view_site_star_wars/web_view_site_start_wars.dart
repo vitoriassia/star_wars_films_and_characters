@@ -27,25 +27,6 @@ class _WebViewStiteStarWarsState extends State<WebViewStiteStarWars> {
           },
           url: 'https://www.starwars.com/community',
         ),
-        loadingSite
-            ? Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(
-                      color: kPrimaryColor,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Carregando Site...",
-                      style: optionStyle,
-                    ),
-                  ],
-                ),
-              )
-            : Container(),
       ],
     );
   }
