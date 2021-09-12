@@ -18,7 +18,22 @@ class FavoritsModel {
       characterModel.photo,
       TypeFavorit.Movie);
 
+  factory FavoritsModel.fromMap(Map<String, dynamic> map) => FavoritsModel(
+      map["id"],
+      map["title"],
+      map["subtitle"],
+      map["image"],
+      map["type"] == "movie" ? TypeFavorit.Movie : TypeFavorit.Character);
+
   factory FavoritsModel.fromCharacters(CharacterModel characterModel) =>
       FavoritsModel(characterModel.id, characterModel.name, '',
           characterModel.image, TypeFavorit.Character);
+
+  Map<String, dynamic> toMap() => {
+        "id": id,
+        "title": title,
+        "subtitle": subtitle,
+        "image": image,
+        "type": typeFavorit == TypeFavorit.Character ? "character" : "movie"
+      };
 }

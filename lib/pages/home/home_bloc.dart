@@ -32,6 +32,7 @@ class HomeBloc extends BlocBase {
     await loadingListOfCharacters();
     await loadingListOfMovies();
     await getMyMojiDataBase();
+    await loadingMyFavorits();
     _loadingIn.add(false);
   }
 
@@ -53,8 +54,39 @@ class HomeBloc extends BlocBase {
     }
   }
 
+  Future<void> loadingMyFavorits() async {
+    try {
+      var newList = await _dataBase.getAllFavorit();
+      _favorits.addAll(newList);
+      refreshListCharactersAndMoviesOfFavorits();
+    } catch (e) {
+      _loading.addError(e);
+    }
+  }
+
+  void refreshListCharactersAndMoviesOfFavorits() {
+    _favorits.forEach((favorit) {
+      favorit.typeFavorit == TypeFavorit.Character
+          ? _characters.forEach((character) {
+              if (favorit.id == character.id) character.isFavorit = true;
+            })
+          : _movies.forEach((movie) {
+              if (favorit.id == movie.id) movie.isFavorit = true;
+            });
+    });
+  }
+
   Future<void> addMojiToDb() async {
     await _dataBase.addMojiToDatabase(this.myMoji);
+  }
+
+  Future<void> addFavoritDb(FavoritsModel favoritsModel) async {
+    await _dataBase.addFavoritToDatabase(favoritsModel);
+  }
+
+  Future<void> removeFavoritDb(int id, TypeFavorit type) async {
+    await _dataBase.deleteFavoritWithId(
+        id, type == TypeFavorit.Movie ? 'movie' : 'character');
   }
 
   Future<void> getMyMojiDataBase() async {
@@ -63,15 +95,22 @@ class HomeBloc extends BlocBase {
 
   List<FavoritsModel> get listOfFavorits => _favorits;
 
-  addItemFavoritModel(FavoritsModel favoritsModel) =>
-      _favorits.add(favoritsModel);
-  removeItemFavoritModel(int favoritsId, TypeFavorit type) =>
-      _favorits.removeWhere(
-          (element) => element.id == favoritsId && element.typeFavorit == type);
+  addItemFavoritModel(FavoritsModel favoritsModel) async {
+    _favorits.add(favoritsModel);
+    await addFavoritDb(favoritsModel);
+  }
+
+  removeItemFavoritModel(int favoritsId, TypeFavorit type) async {
+    _favorits.removeWhere(
+        (element) => element.id == favoritsId && element.typeFavorit == type);
+    await removeFavoritDb(favoritsId, type);
+  }
+
   removeItembyFavoritModel(
     FavoritsModel favoritsModel,
-  ) {
+  ) async {
     _favorits.remove(favoritsModel);
+    await removeFavoritDb(favoritsModel.id, favoritsModel.typeFavorit);
     favoritsModel.typeFavorit == TypeFavorit.Character
         ? _characters.forEach((element) {
             if (element.id == favoritsModel.id) element.isFavorit = false;

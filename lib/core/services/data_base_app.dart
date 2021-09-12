@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:star_wars_films_and_characters/shared/models/favortis_model.dart';
 
 class AppDatabaseProvider {
   AppDatabaseProvider._();
@@ -19,12 +20,20 @@ class AppDatabaseProvider {
 
   Future<Database> getDatabaseInstance() async {
     Directory directory = await getApplicationDocumentsDirectory();
-    String path = join(directory.path, "Moji.db");
+    String path = join(directory.path, "appDataBase.db");
     return await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
       await db.execute("CREATE TABLE Moji ("
           "id integer primary key AUTOINCREMENT,"
           "mojiSvg TEXT"
+          ")");
+
+      await db.execute("CREATE TABLE Favorit ("
+          "id integer primary key,"
+          "title TEXT,"
+          "subtitle TEXT,"
+          "image TEXT,"
+          "type TEXT"
           ")");
     });
   }
@@ -43,6 +52,16 @@ class AppDatabaseProvider {
       var raw = await updateMoji(verifyExistMoji.first["id"], moji);
       return raw;
     }
+  }
+
+  addFavoritToDatabase(FavoritsModel favorit) async {
+    final db = await database;
+    var raw = await db.insert(
+      "Favorit",
+      favorit.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    return raw;
   }
 
   updateMoji(int id, String moji) async {
@@ -69,15 +88,17 @@ class AppDatabaseProvider {
     db.delete("Moji");
   }
 
-  // deletePersonWithId(int id) async {
-  //   final db = await database;
-  //   return db.delete("Person", where: "id = ?", whereArgs: [id]);
-  // }
+  Future<List<FavoritsModel>> getAllFavorit() async {
+    final db = await database;
+    var response = await db.query("Favorit");
+    List<FavoritsModel> list =
+        response.map((c) => FavoritsModel.fromMap(c)).toList();
+    return list;
+  }
 
-  // Future<String> getPersonWithId(int id) async {
-  //   final db = await database;
-  //   var response = await db.query("Person", where: "id = ?", whereArgs: [id]);
-  //   return response.isNotEmpty ? Person.fromMap(response.first) : null;
-  // }
-
+  deleteFavoritWithId(int id, String type) async {
+    final db = await database;
+    return db
+        .delete("Favorit", where: "id = ? and type = ?", whereArgs: [id, type]);
+  }
 }

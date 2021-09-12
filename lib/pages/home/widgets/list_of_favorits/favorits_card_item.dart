@@ -96,14 +96,11 @@ class _FavoritsCardItemState extends State<FavoritsCardItem> {
 
     return HeartAnimationWidget(
       child: IconButton(
-        icon: Icon(
-          icon,
-          color: color,
-        ),
-        onPressed: () => setState(() {
-          widget.removeItem();
-        }),
-      ),
+          icon: Icon(
+            icon,
+            color: color,
+          ),
+          onPressed: () => widget.removeItem()),
       isAnimating: false,
       duration: Duration(milliseconds: 400),
     );

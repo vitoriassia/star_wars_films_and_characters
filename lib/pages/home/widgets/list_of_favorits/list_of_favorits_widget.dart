@@ -25,19 +25,17 @@ class _ListOfFavoritsWidgetState extends State<ListOfFavoritsWidget> {
             thickness: 6,
             radius: Radius.circular(2),
             child: Padding(
-              padding: const EdgeInsets.only(right: 10, left: 10),
-              child: AnimatedList(
-                key: listKey,
-                initialItemCount: bloc.listOfFavorits.length,
-                itemBuilder: (context, index, animation) {
-                  return slideIt(
-                    context,
-                    index,
-                    animation,
-                  ); // Refer step 3
-                },
-              ),
-            ))
+                padding: const EdgeInsets.only(right: 10, left: 10),
+                child: ListView.builder(
+                  itemCount: bloc.listOfFavorits.length,
+                  itemBuilder: (context, index) => FavoritsCardItem(
+                      favoritsModel: bloc.listOfFavorits[index],
+                      removeItem: () async {
+                        bloc.removeItembyFavoritModel(
+                            bloc.listOfFavorits[index]);
+                        setState(() {});
+                      }),
+                )))
         : Center(
             child: Text(
               'Nenhum favorito selecionado.',
@@ -45,34 +43,5 @@ class _ListOfFavoritsWidgetState extends State<ListOfFavoritsWidget> {
               textAlign: TextAlign.center,
             ),
           );
-  }
-
-  Widget slideIt(
-    BuildContext context,
-    int index,
-    animation,
-  ) {
-    FavoritsModel item = bloc.listOfFavorits[index];
-
-    return SlideTransition(
-      position: Tween<Offset>(
-        begin: const Offset(-1, 0),
-        end: Offset(0, 0),
-      ).animate(animation),
-      child: SizeTransition(
-        axis: Axis.vertical,
-        sizeFactor: animation,
-        child: FavoritsCardItem(
-            favoritsModel: item,
-            removeItem: () async {
-              listKey.currentState!.removeItem(
-                  index, (_, animation) => slideIt(context, index, animation),
-                  duration: const Duration(milliseconds: 400));
-              await Future.delayed(Duration(milliseconds: 600));
-              bloc.removeItembyFavoritModel(item);
-              setState(() {});
-            }),
-      ),
-    );
   }
 }
