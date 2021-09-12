@@ -1,8 +1,31 @@
 # Star Wars Filmes e Personagens
 
-Aplicativo para ver persoganes e filmes de Star Wars e Criar seu próprio avatar!!
+Aplicativo para ver personagens e filmes de Star Wars e Criar seu próprio avatar!!
 
-# Telas Aplicativo:
+## Como rodar?
+### Modo 1 - EASY
+
+Instalar este <a href="https://github.com/vitoriassia/star_wars_films_and_characters/blob/master/assets/image_readme/app.apk">APK</a>  em seu celular android.
+
+### Modo 2 - HARD rsrs 
+ 1-> Instalar o <a href="https://flutter.dev/docs/get-started/install">Flutter</a> na sua máquina.
+
+ 2-> E rodar o comando abaixo no diretório do projeto:
+ 
+ ## Modo DEBUG
+ ```console
+
+foo@terminal:~$ flutter run
+
+```
+## Modo RELEASE
+```console
+
+foo@terminal:~$ flutter run --release
+
+```
+
+## Telas Aplicativo:
 
 
 <div style="text-align: center">
@@ -25,7 +48,7 @@ Aplicativo para ver persoganes e filmes de Star Wars e Criar seu próprio avatar
 </div>
 
 
-# Como criar seu Próprio Avatar
+## Como criar seu Próprio Avatar
 
 1-> Clique no Botão de Perfil.
 
@@ -33,7 +56,7 @@ Aplicativo para ver persoganes e filmes de Star Wars e Criar seu próprio avatar
 
 3-> Edite seu personagem.
 
-4-> Clique no ícone de salvar e depois confirme as alterações.(Precisa clicar nos dois botões nessa ordem para salvar corretamente).
+4-> Clique no ícone de salvar e depois confirme as alterações. (Precisa clicar nos dois botões nessa ordem para salvar corretamente).
 
 
 <div style="text-align: center">
@@ -49,5 +72,16 @@ Aplicativo para ver persoganes e filmes de Star Wars e Criar seu próprio avatar
     </table>
 </div>
 
-# Adione seus favoritos com apenas 2 cliques
+## Adicione e remova seus favoritos com facilidade
+
+1- > Adicionar com dois cliques.
+
+
+![LIKE](https://github.com/vitoriassia/star_wars_films_and_characters/blob/master/assets/image_readme/favoritos1.gif)
+
+
+2-> Remover com um clique no ícone.
+
+
+![REMOVENDO](https://github.com/vitoriassia/star_wars_films_and_characters/blob/master/assets/image_readme/favoritos2.gif)
 
