@@ -2,12 +2,6 @@
 
 Aplicativo para ver persoganes e filmes de Star Wars e Criar seu próprio avatar!!
 
-<div style="text-align: center">
-    <a href="https://github.com/vitoriassia/Help-you-with-flutter/blob/master/lib/ui/screens/home_screen/home_screen.dart">
-    <img src="https://github.com/vitoriassia/Help-you-with-flutter/blob/master/assets/images_readme/sweet_button_image/sweet_button_item_list.png" /></a>
-</div>
-
-
 # Telas Aplicativo:
 
 
@@ -29,3 +23,31 @@ Aplicativo para ver persoganes e filmes de Star Wars e Criar seu próprio avatar
         </tr>
     </table>
 </div>
+
+
+# Como criar seu Próprio Avatar
+
+1-> Clique no Botão de Perfil.
+
+2-> Clique no Botão de Editar.
+
+3-> Edite seu personagem.
+
+4-> Clique no ícone de salvar e depois confirme as alterações.(Precisa clicar nos dois botões nessa ordem para salvar corretamente).
+
+
+<div style="text-align: center">
+    <table>
+        <tr>
+             <td style="text-align: center">
+               <img src="https://github.com/vitoriassia/star_wars_films_and_characters/blob/master/assets/image_readme/avatar1.jpeg" >
+            </td>
+             <td style="text-align: center">
+               <img src="https://github.com/vitoriassia/star_wars_films_and_characters/blob/master/assets/image_readme/avatar2.jpeg" >
+            </td>
+        </tr>
+    </table>
+</div>
+
+# Adione seus favoritos com apenas 2 cliques
+
